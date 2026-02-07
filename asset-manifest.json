@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/super-bowl-props/static/css/main.e6c13ad2.css",
+    "main.js": "/super-bowl-props/static/js/main.337e89c3.js",
+    "static/js/453.d94d2939.chunk.js": "/super-bowl-props/static/js/453.d94d2939.chunk.js",
+    "static/media/Super_Bowl_LX_Logo.png": "/super-bowl-props/static/media/Super_Bowl_LX_Logo.21753735fbbf45418d60.png",
+    "index.html": "/super-bowl-props/index.html",
+    "main.e6c13ad2.css.map": "/super-bowl-props/static/css/main.e6c13ad2.css.map",
+    "main.337e89c3.js.map": "/super-bowl-props/static/js/main.337e89c3.js.map",
+    "453.d94d2939.chunk.js.map": "/super-bowl-props/static/js/453.d94d2939.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.337e89c3.js"
+  ]
+}
