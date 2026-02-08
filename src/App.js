@@ -37,40 +37,65 @@ import SeahawksLogo from "./assets/Seahawks.png";
  // CHANGE THIS
 
 const QUESTIONS = [
-  { id: 1, text: "1) Length of National Anthem", options: ["Over 120 sec", "Under 120 sec"] },
-  { id: 2, text: "2) Coin Toss", options: ["Heads", "Tails"] },
-  { id: 3, text: "3) First Offensive Play", options: ["Run", "Pass"] },
-  { id: 4, text: "4) Team to Score First", options: ["Patriots", "Seahawks"] },
-  { id: 5, text: "5) First Turnover", options: ["Fumble", "Interception", "Turnover on Downs", "Missed FG"] },
-  { id: 6, text: "6) First Accepted Penalty", options: ["Patriots", "Seahawks"] },
-  { id: 7, text: "7) First Team to 10 Points", options: ["Patriots", "Seahawks", "Neither"] },
-  { id: 8, text: "8) Score in Last 2 Minutes of 1st Half", options: ["Yes", "No"] },
-  { id: 9, text: "9) First Halftime Song", options: ["ALAMBRE PuA", "La Mudanza", "Titi Me Pregunto", "NUEVAYoL", "Other"] },
-  { id: 10, text: "10) Guest Performer Appears", options: ["Yes", "No"] },
-  { id: 11, text: "11) Total Halftime Songs", options: ["Over 11.5", "Under 11.5"] },
-  { id: 12, text: "12) Players to Attempt a Pass", options: ["Over 2.5", "Under 2.5"] },
-  { id: 13, text: "13) Most Passing Yards", options: ["Drake Maye", "Sam Darnold", "Other"] },
-  { id: 14, text: "14) Most Rushing Yards", options: ["Rhamondre Stevenson", "Kenneth Walker III", "Other"] },
-  { id: 15, text: "15) Most Receiving Yards", options: ["Stephon Diggs", "Hunter Henry", "JSN", "Cooper Kupp", "Other"] },
-  { id: 16, text: "16) Gatorade Color", options: ["Lime/Green/Yellow", "Clear/Water", "Red/Pink", "Blue", "Orange", "Purple"] },
-  { id: 17, text: "17) Score in Last 2 Minutes of 4th Qtr", options: ["Yes", "No"] },
-  { id: 18, text: "18) Super Bowl Winner", options: ["Patriots", "Seahawks"] },
-  { id: 19, text: "19) Total Points O/U 46.5", options: ["Over 46.5", "Under 46.5"] },
-  { id: 20, text: "20) Super Bowl MVP", options: ["Drake Maye", "Sam Darnold", "Any Other Player"] },
+  { id: 1, text: "National Anthem (O/U 120s)", options: ["Over", "Under"] },
+  { id: 2, text: "Coin Toss", options: ["Heads", "Tails"] },
+  { id: 3, text: "First Offensive Play", options: ["Run", "Pass"] },
+  { id: 4, text: "Team to Score 1st", options: ["Pats", "Hawks"] },
+  { id: 5, text: "First Turnover", options: ["Fumble", "Int", "Downs", "Missed FG"] },
+  { id: 6, text: "First Accepted Penalty", options: ["Pats", "Hawks"] },
+  { id: 7, text: "First Team to 10 Pts", options: ["Pats", "Hawks", "Neither"] },
+  { id: 8, text: "Score in Last 2 Mins of 1st Half", options: ["Yes", "No"] },
+  { id: 9, text: "First Halftime Song", options: ["ALAMBRE PuA", "La Mudanza", "Titi Me Pregunto", "NUEVAYoL", "Other"] },
+  { id: 10, text: "Guest Performer Appears", options: ["Yes", "No"] },
+  { id: 11, text: "Halftime Songs (O/U 11.5)", options: ["Over", "Under"] },
+  { id: 12, text: "Players to Attempt a Pass (O/U 2.5)", options: ["Over", "Under"] },
+  { id: 13, text: "Most Pass Yds", options: ["Maye", "Darnold", "Other"] },
+  { id: 14, text: "Most Rush Yds", options: ["Stevenson", "Walker", "Other"] },
+  { id: 15, text: "Most Rec Yds", options: ["Diggs", "Henry", "JSN", "Kupp", "Other"] },
+  { id: 16, text: "Gatorade Color", options: ["Lime/Green/Yellow", "Clear/Water", "Red/Pink", "Blue", "Orange", "Purple"] },
+  { id: 17, text: "Score in Last 2 Minutes of 4th", options: ["Yes", "No"] },
+  { id: 18, text: "Winner", options: ["Pats", "Hawks"] },
+  { id: 19, text: "Total Points (O/U 46.4)", options: ["Over", "Under"] },
+  { id: 20, text: "MVP", options: ["Maye", "Darnold", "Other"] },
 ];
 
 const PLAYERS = [
   { id: "bob", name: "Bob" },
   { id: "tara", name: "Tara" },
   { id: "frank", name: "Frank" },
+  { id: "crystal", name: "Crystal" },
+  { id: "mike", name: "Mike" },
+  { id: "monica", name: "Monica" },
+  { id: "adam", name: "Adam" },
 ];
+
+const DEFAULT_PICKS = {
+  // bob: {
+  //   1: "Over 120 sec",
+  //   2: "Heads",
+  //   3: "Pass",
+  //   // ...
+  // },
+  // tara: {
+  //   1: "Under 120 sec",
+  //   2: "Tails",
+  //   // ...
+  // }
+};
+
+const DEFAULT_ANSWERS = {
+  // 1: "Over 120 sec",
+  // 2: "Heads",
+  // ...
+};
+
 
 export default function App() {
   const [isAdmin, setIsAdmin] = useState(false);
 
-  
-  const [picks, setPicks] = useState(() => JSON.parse(localStorage.getItem("picks")) || {});
-  const [answers, setAnswers] = useState(() => JSON.parse(localStorage.getItem("answers")) || {});
+  const [picks, setPicks] = useState(() => JSON.parse(localStorage.getItem("picks")) || DEFAULT_PICKS);
+  const [answers, setAnswers] = useState(() => JSON.parse(localStorage.getItem("answers")) || DEFAULT_ANSWERS);
+
 
   useEffect(() => {
     localStorage.setItem("picks", JSON.stringify(picks));
@@ -162,14 +187,14 @@ export default function App() {
         </Box>
       )}
 
-      <TableContainer component={Paper} sx={{ mb: 4 }}>
-        <Table size="small">
+      <TableContainer component={Paper} sx={{ mb: 4, maxHeight: '70vh', overflowX: 'auto' }}>
+        <Table size="small" stickyHeader>
           <TableHead>
             <TableRow>
-              <TableCell><strong>Prop</strong></TableCell>
-              <TableCell><strong>Correct Answer</strong></TableCell>
+              <TableCell sx={{ minWidth: 120, position: 'sticky', left: 0, zIndex: 3, backgroundColor: 'background.paper', borderRight: '1px solid #e0e0e0' }}><strong>Prop</strong></TableCell>
+              <TableCell sx={{ minWidth: 60, borderRight: '1px solid #e0e0e0' }}><strong>Correct Answer</strong></TableCell>
               {PLAYERS.map(p => (
-                <TableCell key={p.id}>
+                <TableCell key={p.id} sx={{ borderRight: '1px solid #f0f0f0' }}>
                   <strong>{p.name}</strong>
                   <Typography variant="caption" display="block">
                     {scoreFor(p.id)} / {QUESTIONS.length}
@@ -181,10 +206,10 @@ export default function App() {
           <TableBody>
             {QUESTIONS.map(q => (
               <TableRow key={q.id}>
-                <TableCell>{q.text}</TableCell>
+                <TableCell sx={{ position: 'sticky', left: 0, zIndex: 2, backgroundColor: 'background.paper', borderRight: '1px solid #f0f0f0' }}>{q.text}</TableCell>
 
                 {/* Correct Answer Column */}
-                <TableCell sx={{ bgcolor: answers[q.id] ? '#e3f2fd' : 'inherit' }}>
+                <TableCell sx={{ borderRight: '1px solid #f0f0f0', bgcolor: answers[q.id] ? '#e3f2fd' : 'inherit' }}>
                   {isAdmin ? (
                     <Select
                       value={answers[q.id] || ""}
@@ -211,6 +236,7 @@ export default function App() {
                     <TableCell
                       key={p.id}
                       sx={{
+                        borderRight: '1px solid #f0f0f0',
                         bgcolor: answers[q.id]
                           ? isCorrect
                             ? '#e8f5e9'
@@ -268,9 +294,9 @@ export default function App() {
                     bgcolor:
                       p.rank === 1
                         ? "warning.main"
-                        : idx === 2
+                        : p.rank === 2
                         ? "grey.400"
-                        : idx === 3
+                        : p.rank === 3
                         ? "brown"
                         : "primary.main",
                     fontWeight: "bold",
