@@ -191,7 +191,7 @@ export default function App() {
         <Table size="small" stickyHeader>
           <TableHead>
             <TableRow>
-              <TableCell sx={{ minWidth: 120, position: 'sticky', left: 0, zIndex: 3, backgroundColor: 'background.paper', borderRight: '1px solid #e0e0e0' }}><strong>Prop</strong></TableCell>
+              <TableCell sx={{ minWidth: 90, position: 'sticky', left: 0, zIndex: 3, backgroundColor: 'background.paper', borderRight: '1px solid #e0e0e0' }}><strong>Prop</strong></TableCell>
               <TableCell sx={{ minWidth: 60, borderRight: '1px solid #e0e0e0' }}><strong>Correct Answer</strong></TableCell>
               {PLAYERS.map(p => (
                 <TableCell key={p.id} sx={{ borderRight: '1px solid #f0f0f0' }}>
